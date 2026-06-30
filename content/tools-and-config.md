@@ -71,7 +71,7 @@ metadata:
 
 **日期**: 2026-06-26
 
-**Why**: 查询黄金数据时，连续 5 次 WebFetch 全部因域名安全验证失败，浪费大量 token 和时间。实际上第一次 WebSearch 返回的摘要已经包含所有关键数据，后续抓取是多余的。
+**Why**: 连续 5 次 WebFetch 全部因域名安全验证失败，浪费大量 token 和时间。实际上第一次 WebSearch 返回的摘要已经包含所有关键数据，后续抓取是多余的。
 
 **规则**:
 
@@ -83,4 +83,4 @@ metadata:
 ---
 
 ## 关联记忆
-[[gold-investment-analysis]]
+

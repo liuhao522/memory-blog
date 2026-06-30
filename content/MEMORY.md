@@ -15,7 +15,6 @@
 - [Redis ProtoStuff反序列化故障](redis-protoStuff-deserialize-fix.md) — Dept缓存损坏→录音页500 · 不同账号不同表现 · 修复方案
 
 ## 🔬 独立项目
-- [黄金投资分析](gold-investment-analysis.md) — 积存金持仓跟踪 · AU0数据 · 技术分析 · 情景预测
 - [AI工牌原型 aiai2](aiai2-smart-badge-ai-platform.md) — Google AI Studio纯前端 · Vue3+Vite+Tailwind+Gemini
 - [后门防御论文](backdoor-defense-paper.md) — 目标转投Pattern Recognition(CCF-B) · Neurocomputing兜底 · 7月底截稿
 - [期刊筛选分析](journal-selection-analysis.md) — PR/ESWA/KBS/Neurocomputing四刊2025数据对比 · 方向匹配度 · 最终决策
