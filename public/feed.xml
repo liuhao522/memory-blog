@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>记忆知识库</title>
+    <link>https://your-domain.pages.dev</link>
+    <description>基于本地记忆知识图谱搭建的个人博客，涵盖全栈开发、架构设计、投资分析等技术笔记。</description>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 30 Jun 2026 09:25:54 GMT</lastBuildDate>
+    <atom:link href="https://your-domain.pages.dev/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title><![CDATA[凡见智慧 AI 工牌综合管理平台 (aiai2)]]></title>
+      <link>https://your-domain.pages.dev/aiai2-smart-badge-ai-platform</link>
+      <guid>https://your-domain.pages.dev/aiai2-smart-badge-ai-platform</guid>
+      <description><![CDATA[凡见智慧AI工牌系统 — 基于 Google AI Studio 的纯前端原型，融合硬件拾音+AI转写+智能质检+客户洞察]]></description>
+      <category>🔬 独立项目</category>
+      <pubDate>Thu, 18 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[后门防御深度哈希论文 —— Neurocomputing 投稿全过程追踪]]></title>
+      <link>https://your-domain.pages.dev/backdoor-defense-paper</link>
+      <guid>https://your-domain.pages.dev/backdoor-defense-paper</guid>
+      <description><![CDATA[后门防御深度哈希论文 —— Neurocomputing 投稿全过程追踪]]></description>
+      <category>🔬 独立项目</category>
+      <pubDate></pubDate>
+    </item>
+    <item>
+      <title><![CDATA[BladeX 平台知识图谱]]></title>
+      <link>https://your-domain.pages.dev/bladex-platform</link>
+      <guid>https://your-domain.pages.dev/bladex-platform</guid>
+      <description><![CDATA[BladeX微服务平台完整知识图谱 — 后端架构、前端架构、多租户机制、编译环境]]></description>
+      <category>🏗️ 平台基础设施</category>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[打卡系统知识图谱]]></title>
+      <link>https://your-domain.pages.dev/checkin-system</link>
+      <guid>https://your-domain.pages.dev/checkin-system</guid>
+      <description><![CDATA[工牌打卡系统完整知识图谱 — v3最新架构、打卡点管理、批量导入、自动匹配、监控、使用手册]]></description>
+      <category>📊 业务系统</category>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[黄金投资分析上下文]]></title>
+      <link>https://your-domain.pages.dev/gold-investment-analysis</link>
+      <guid>https://your-domain.pages.dev/gold-investment-analysis</guid>
+      <description><![CDATA[积存金持仓跟踪、AU0数据源、技术分析、情景预测、再入场计划]]></description>
+      <category>🔬 独立项目</category>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[后门防御深度哈希论文的目标期刊筛选——PR/ESWA/KBS/Neurocomputing 四选一]]></title>
+      <link>https://your-domain.pages.dev/journal-selection-analysis</link>
+      <guid>https://your-domain.pages.dev/journal-selection-analysis</guid>
+      <description><![CDATA[后门防御深度哈希论文的目标期刊筛选——PR/ESWA/KBS/Neurocomputing 四选一]]></description>
+      <category>🔬 独立项目</category>
+      <pubDate></pubDate>
+    </item>
+    <item>
+      <title><![CDATA[小型订货系统]]></title>
+      <link>https://your-domain.pages.dev/order-system</link>
+      <guid>https://your-domain.pages.dev/order-system</guid>
+      <description><![CDATA[小型订货系统 — Spring Boot + H2 + Vue3 管理后台 + H5移动端 · 已验收待部署]]></description>
+      <category>🔬 独立项目</category>
+      <pubDate>Tue, 30 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[Redis ProtoStuff 反序列化故障]]></title>
+      <link>https://your-domain.pages.dev/redis-protoStuff-deserialize-fix</link>
+      <guid>https://your-domain.pages.dev/redis-protoStuff-deserialize-fix</guid>
+      <description><![CDATA[Redis ProtoStuff反序列化故障排查 — Dept缓存损坏导致录音页面500 · 不同账号不同表现 · 修复方案]]></description>
+      <category>🐛 故障排查</category>
+      <pubDate>Tue, 30 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[统计大屏知识图谱]]></title>
+      <link>https://your-domain.pages.dev/stats-dashboard</link>
+      <guid>https://your-domain.pages.dev/stats-dashboard</guid>
+      <description><![CDATA[统计大屏完整知识图谱 — 5 Tab架构、全部API、数据表、修复历史、已知问题]]></description>
+      <category>📊 业务系统</category>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[开发工具与配置知识图谱]]></title>
+      <link>https://your-domain.pages.dev/tools-and-config</link>
+      <guid>https://your-domain.pages.dev/tools-and-config</guid>
+      <description><![CDATA[开发工具与配置知识图谱 — Puppeteer MCP、知识图谱MCP、WebFetch止损规则]]></description>
+      <category>🔧 工具与环境</category>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[声纹识别系统知识图谱]]></title>
+      <link>https://your-domain.pages.dev/voiceprint-system</link>
+      <guid>https://your-domain.pages.dev/voiceprint-system</guid>
+      <description><![CDATA[声纹识别系统知识图谱 — 注册姓名查询逻辑、跳过未注册优化]]></description>
+      <category>📊 业务系统</category>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[智慧工牌平台 — 新手上手指南]]></title>
+      <link>https://your-domain.pages.dev/smart-badge-platform-user-manual</link>
+      <guid>https://your-domain.pages.dev/smart-badge-platform-user-manual</guid>
+      <description><![CDATA[智慧工牌平台完整使用手册 — 面向新手，覆盖全部 14 个功能模块]]></description>
+      <category>📊 业务系统</category>
+      <pubDate>Tue, 23 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
