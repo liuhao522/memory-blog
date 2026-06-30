@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: 255 255 255;
+    --color-fg: 15 23 42;
+    --color-muted: 100 116 139;
+    --color-border: 226 232 240;
+    --color-card: 255 255 255;
+    --color-card-hover: 248 250 252;
+    --color-accent: 99 102 241;
+  }
+
+  .dark {
+    --color-bg: 15 23 42;
+    --color-fg: 226 232 240;
+    --color-muted: 148 163 184;
+    --color-border: 51 65 85;
+    --color-card: 30 41 59;
+    --color-card-hover: 51 65 85;
+    --color-accent: 129 140 248;
+  }
+}
+
+body {
+  background-color: rgb(var(--color-bg));
+  color: rgb(var(--color-fg));
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Code block styling */
+pre code {
+  background-color: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Prose overrides for dark mode */
+.dark .prose {
+  --tw-prose-body: rgb(226 232 240);
+  --tw-prose-headings: rgb(248 250 252);
+  --tw-prose-links: rgb(165 180 252);
+  --tw-prose-bold: rgb(248 250 252);
+  --tw-prose-counters: rgb(148 163 184);
+  --tw-prose-bullets: rgb(148 163 184);
+  --tw-prose-hr: rgb(51 65 85);
+  --tw-prose-quotes: rgb(226 232 240);
+  --tw-prose-quote-borders: rgb(99 102 241);
+  --tw-prose-captions: rgb(148 163 184);
+  --tw-prose-code: rgb(226 232 240);
+  --tw-prose-pre-code: rgb(226 232 240);
+  --tw-prose-pre-bg: rgb(30 41 59);
+  --tw-prose-th-borders: rgb(51 65 85);
+  --tw-prose-td-borders: rgb(51 65 85);
+  --tw-prose-invert-body: rgb(226 232 240);
+  --tw-prose-invert-headings: rgb(248 250 252);
+  --tw-prose-invert-links: rgb(165 180 252);
+  --tw-prose-invert-bold: rgb(248 250 252);
+}
+
+.dark .prose table {
+  border-color: rgb(51 65 85);
+}
+
+.dark .prose thead {
+  border-bottom-color: rgb(51 65 85);
+}
+
+.dark .prose th {
+  background-color: rgb(30 41 59);
+}
+
+.dark .prose tr {
+  border-bottom-color: rgb(51 65 85);
+}
