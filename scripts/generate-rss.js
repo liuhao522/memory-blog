@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
 
-const BASE_URL = "https://your-domain.pages.dev"; // 部署后更新
+const BASE_URL = "https://liuhao522.github.io/memory-blog";
 const CONTENT_DIR = path.join(__dirname, "..", "content");
 const OUTPUT = path.join(__dirname, "..", "public", "feed.xml");
 
