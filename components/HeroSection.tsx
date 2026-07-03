@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const stats = [
   { value: "3+", label: "年经验" },
@@ -87,12 +88,12 @@ export default function HeroSection() {
         >
           查看项目
         </a>
-        <a
+        <Link
           href="/about"
           className="px-5 sm:px-6 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 hover:border-slate-500 dark:hover:border-slate-500 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium text-sm transition-colors"
         >
           关于我
-        </a>
+        </Link>
       </motion.div>
     </div>
   );

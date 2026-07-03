@@ -53,7 +53,7 @@ export default function RootLayout({
           rel="alternate"
           type="application/rss+xml"
           title="Hao Liu RSS"
-          href="/feed.xml"
+          href="/memory-blog/feed.xml"
         />
       </head>
       <body className="min-h-screen flex flex-col antialiased font-sans bg-[rgb(var(--color-bg))] text-[rgb(var(--color-fg))]">
