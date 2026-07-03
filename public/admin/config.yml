@@ -2,9 +2,9 @@ backend:
   name: github
   repo: liuhao522/memory-blog
   branch: main
-  base_url: https://api.decapcms.org
-  auth_endpoint: /auth
-  auth_type: pkce
+  # 👇 部署完 Vercel 代理后，改成你的域名
+  base_url: https://YOUR-VERCEL-APP.vercel.app
+  auth_endpoint: /api/auth
 
 # 管理页面路径
 site_url: https://liuhao522.github.io/memory-blog
