@@ -2,103 +2,127 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>记忆知识库</title>
-    <link>https://your-domain.pages.dev</link>
+    <link>https://liuhao522.github.io/memory-blog</link>
     <description>基于本地记忆知识图谱搭建的个人博客，涵盖全栈开发、架构设计、投资分析等技术笔记。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 30 Jun 2026 09:25:54 GMT</lastBuildDate>
-    <atom:link href="https://your-domain.pages.dev/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Fri, 03 Jul 2026 08:30:21 GMT</lastBuildDate>
+    <atom:link href="https://liuhao522.github.io/memory-blog/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title><![CDATA[凡见智慧 AI 工牌综合管理平台 (aiai2)]]></title>
-      <link>https://your-domain.pages.dev/aiai2-smart-badge-ai-platform</link>
-      <guid>https://your-domain.pages.dev/aiai2-smart-badge-ai-platform</guid>
+      <link>https://liuhao522.github.io/memory-blog/aiai2-smart-badge-ai-platform</link>
+      <guid>https://liuhao522.github.io/memory-blog/aiai2-smart-badge-ai-platform</guid>
       <description><![CDATA[凡见智慧AI工牌系统 — 基于 Google AI Studio 的纯前端原型，融合硬件拾音+AI转写+智能质检+客户洞察]]></description>
       <category>🔬 独立项目</category>
       <pubDate>Thu, 18 Jun 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title><![CDATA[后门防御深度哈希论文 —— Neurocomputing 投稿全过程追踪]]></title>
-      <link>https://your-domain.pages.dev/backdoor-defense-paper</link>
-      <guid>https://your-domain.pages.dev/backdoor-defense-paper</guid>
+      <link>https://liuhao522.github.io/memory-blog/backdoor-defense-paper</link>
+      <guid>https://liuhao522.github.io/memory-blog/backdoor-defense-paper</guid>
       <description><![CDATA[后门防御深度哈希论文 —— Neurocomputing 投稿全过程追踪]]></description>
       <category>🔬 独立项目</category>
       <pubDate></pubDate>
     </item>
     <item>
-      <title><![CDATA[BladeX 平台知识图谱]]></title>
-      <link>https://your-domain.pages.dev/bladex-platform</link>
-      <guid>https://your-domain.pages.dev/bladex-platform</guid>
-      <description><![CDATA[BladeX微服务平台完整知识图谱 — 后端架构、前端架构、多租户机制、编译环境]]></description>
-      <category>🏗️ 平台基础设施</category>
-      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+      <title><![CDATA[Feed 流推送架构：从关注取关到千万粉丝消息推送]]></title>
+      <link>https://liuhao522.github.io/memory-blog/feed-push-architecture</link>
+      <guid>https://liuhao522.github.io/memory-blog/feed-push-architecture</guid>
+      <description><![CDATA[详解社交平台的关注/粉丝/Feed 流推送架构设计：Redis Set 双向关注关系、ZSet Feed 收件箱、推拉模式选择、大 V 粉丝异步推送优化。含 Kafka 消息队列在生产环境的核心用法。]]></description>
+      <category>📝 未分类</category>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <title><![CDATA[打卡系统知识图谱]]></title>
-      <link>https://your-domain.pages.dev/checkin-system</link>
-      <guid>https://your-domain.pages.dev/checkin-system</guid>
-      <description><![CDATA[工牌打卡系统完整知识图谱 — v3最新架构、打卡点管理、批量导入、自动匹配、监控、使用手册]]></description>
-      <category>📊 业务系统</category>
-      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+      <title><![CDATA[Redis BitMap 实现千万用户每日签到]]></title>
+      <link>https://liuhao522.github.io/memory-blog/redis-bitmap-checkin</link>
+      <guid>https://liuhao522.github.io/memory-blog/redis-bitmap-checkin</guid>
+      <description><![CDATA[用 Redis BitMap 实现签到功能的完整方案：为什么不用 MySQL？如何防止重复签到？连续签到天数怎么算？100 万用户 1 个月仅需几 MB 内存，SETBIT + BITCOUNT 一行命令搞定。]]></description>
+      <category>📝 未分类</category>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <title><![CDATA[黄金投资分析上下文]]></title>
-      <link>https://your-domain.pages.dev/gold-investment-analysis</link>
-      <guid>https://your-domain.pages.dev/gold-investment-analysis</guid>
-      <description><![CDATA[积存金持仓跟踪、AU0数据源、技术分析、情景预测、再入场计划]]></description>
-      <category>🔬 独立项目</category>
-      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+      <title><![CDATA[秒杀系统设计全解：从 Redis+Lua 到消息队列的完整方案]]></title>
+      <link>https://liuhao522.github.io/memory-blog/seckill-system-design</link>
+      <guid>https://liuhao522.github.io/memory-blog/seckill-system-design</guid>
+      <description><![CDATA[深入剖析高并发秒杀系统的完整架构：Redis 库存预扣 + Lua 原子操作 + Redis Stream 异步下单 + Caffeine 多级缓存 + 多维度限流。从单体锁到分布式锁，一文讲透秒杀系统的所有核心技术。]]></description>
+      <category>📝 未分类</category>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <title><![CDATA[后门防御深度哈希论文的目标期刊筛选——PR/ESWA/KBS/Neurocomputing 四选一]]></title>
-      <link>https://your-domain.pages.dev/journal-selection-analysis</link>
-      <guid>https://your-domain.pages.dev/journal-selection-analysis</guid>
-      <description><![CDATA[后门防御深度哈希论文的目标期刊筛选——PR/ESWA/KBS/Neurocomputing 四选一]]></description>
-      <category>🔬 独立项目</category>
-      <pubDate></pubDate>
+      <title><![CDATA[统计大屏体验优化记录]]></title>
+      <link>https://liuhao522.github.io/memory-blog/stats-dashboard-optimization-20260702</link>
+      <guid>https://liuhao522.github.io/memory-blog/stats-dashboard-optimization-20260702</guid>
+      <description><![CDATA[统计大屏多项体验优化 — 质检模型选择器、关注点/抗拒点图表重构、排名榜表格化、时间窗口调整]]></description>
+      <category>📝 未分类</category>
+      <pubDate>Thu, 02 Jul 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title><![CDATA[小型订货系统]]></title>
-      <link>https://your-domain.pages.dev/order-system</link>
-      <guid>https://your-domain.pages.dev/order-system</guid>
+      <link>https://liuhao522.github.io/memory-blog/order-system</link>
+      <guid>https://liuhao522.github.io/memory-blog/order-system</guid>
       <description><![CDATA[小型订货系统 — Spring Boot + H2 + Vue3 管理后台 + H5移动端 · 已验收待部署]]></description>
       <category>🔬 独立项目</category>
       <pubDate>Tue, 30 Jun 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <title><![CDATA[Redis ProtoStuff 反序列化故障]]></title>
-      <link>https://your-domain.pages.dev/redis-protoStuff-deserialize-fix</link>
-      <guid>https://your-domain.pages.dev/redis-protoStuff-deserialize-fix</guid>
-      <description><![CDATA[Redis ProtoStuff反序列化故障排查 — Dept缓存损坏导致录音页面500 · 不同账号不同表现 · 修复方案]]></description>
+      <title><![CDATA[ProtoBuf 缓存污染：一次跨越 7 层调用链的故障排查]]></title>
+      <link>https://liuhao522.github.io/memory-blog/redis-protoStuff-deserialize-fix</link>
+      <guid>https://liuhao522.github.io/memory-blog/redis-protoStuff-deserialize-fix</guid>
+      <description><![CDATA[Redis ProtoStuff 反序列化故障的 7 层调用链排查 — 为什么不同账号看到不同的结果？跨租户缓存污染的完整诊断与修复]]></description>
       <category>🐛 故障排查</category>
       <pubDate>Tue, 30 Jun 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <title><![CDATA[统计大屏知识图谱]]></title>
-      <link>https://your-domain.pages.dev/stats-dashboard</link>
-      <guid>https://your-domain.pages.dev/stats-dashboard</guid>
-      <description><![CDATA[统计大屏完整知识图谱 — 5 Tab架构、全部API、数据表、修复历史、已知问题]]></description>
+      <title><![CDATA[BladeX 平台知识图谱]]></title>
+      <link>https://liuhao522.github.io/memory-blog/bladex-platform</link>
+      <guid>https://liuhao522.github.io/memory-blog/bladex-platform</guid>
+      <description><![CDATA[BladeX微服务平台完整知识图谱 — 后端架构、前端架构、多租户机制、编译环境]]></description>
+      <category>🏗️ 平台基础设施</category>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[GPS 打卡系统 v1→v3：从 60 秒轮询到事件驱动的架构演进]]></title>
+      <link>https://liuhao522.github.io/memory-blog/checkin-system</link>
+      <guid>https://liuhao522.github.io/memory-blog/checkin-system</guid>
+      <description><![CDATA[GPS 打卡系统从 60 秒轮询到事件驱动实时检测的三次架构演进 — Haversine 地理围栏、Excel 批量导入、AMap 自动编码]]></description>
+      <category>📊 业务系统</category>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title><![CDATA[后门防御深度哈希论文的目标期刊筛选——PR/ESWA/KBS/Neurocomputing 四选一]]></title>
+      <link>https://liuhao522.github.io/memory-blog/journal-selection-analysis</link>
+      <guid>https://liuhao522.github.io/memory-blog/journal-selection-analysis</guid>
+      <description><![CDATA[后门防御深度哈希论文的目标期刊筛选——PR/ESWA/KBS/Neurocomputing 四选一]]></description>
+      <category>🔬 独立项目</category>
+      <pubDate></pubDate>
+    </item>
+    <item>
+      <title><![CDATA[从零构建统计大屏：5 个 Tab、12 张表、23 项 Bug 的全链路复盘]]></title>
+      <link>https://liuhao522.github.io/memory-blog/stats-dashboard</link>
+      <guid>https://liuhao522.github.io/memory-blog/stats-dashboard</guid>
+      <description><![CDATA[从零构建复杂数据大屏的完整复盘 — 跨库查询、ECharts 可视化、23 项 Bug 追踪、5 次架构迭代]]></description>
       <category>📊 业务系统</category>
       <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title><![CDATA[开发工具与配置知识图谱]]></title>
-      <link>https://your-domain.pages.dev/tools-and-config</link>
-      <guid>https://your-domain.pages.dev/tools-and-config</guid>
+      <link>https://liuhao522.github.io/memory-blog/tools-and-config</link>
+      <guid>https://liuhao522.github.io/memory-blog/tools-and-config</guid>
       <description><![CDATA[开发工具与配置知识图谱 — Puppeteer MCP、知识图谱MCP、WebFetch止损规则]]></description>
       <category>🔧 工具与环境</category>
       <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title><![CDATA[声纹识别系统知识图谱]]></title>
-      <link>https://your-domain.pages.dev/voiceprint-system</link>
-      <guid>https://your-domain.pages.dev/voiceprint-system</guid>
+      <link>https://liuhao522.github.io/memory-blog/voiceprint-system</link>
+      <guid>https://liuhao522.github.io/memory-blog/voiceprint-system</guid>
       <description><![CDATA[声纹识别系统知识图谱 — 注册姓名查询逻辑、跳过未注册优化]]></description>
       <category>📊 业务系统</category>
       <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title><![CDATA[智慧工牌平台 — 新手上手指南]]></title>
-      <link>https://your-domain.pages.dev/smart-badge-platform-user-manual</link>
-      <guid>https://your-domain.pages.dev/smart-badge-platform-user-manual</guid>
+      <link>https://liuhao522.github.io/memory-blog/smart-badge-platform-user-manual</link>
+      <guid>https://liuhao522.github.io/memory-blog/smart-badge-platform-user-manual</guid>
       <description><![CDATA[智慧工牌平台完整使用手册 — 面向新手，覆盖全部 14 个功能模块]]></description>
       <category>📊 业务系统</category>
       <pubDate>Tue, 23 Jun 2026 00:00:00 GMT</pubDate>

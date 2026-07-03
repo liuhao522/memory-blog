@@ -6,6 +6,9 @@ export interface PostMeta {
   type: string;
   tech: string[];
   date: string;
+  featured?: boolean;
+  highlight?: string;
+  readingTime?: string;
 }
 
 export interface Post extends PostMeta {
@@ -14,11 +17,11 @@ export interface Post extends PostMeta {
 }
 
 export const CATEGORIES = [
-  { key: "platform", label: "🏗️ 平台基础设施", slug: "platform" },
-  { key: "business", label: "📊 业务系统", slug: "business" },
-  { key: "troubleshoot", label: "🐛 故障排查", slug: "troubleshoot" },
-  { key: "project", label: "🔬 独立项目", slug: "project" },
-  { key: "tools", label: "🔧 工具与环境", slug: "tools" },
+  { key: "platform", label: "Platform", slug: "platform" },
+  { key: "business", label: "Business", slug: "business" },
+  { key: "troubleshoot", label: "Troubleshooting", slug: "troubleshoot" },
+  { key: "project", label: "Projects", slug: "project" },
+  { key: "tools", label: "Tools", slug: "tools" },
 ] as const;
 
 export const CATEGORY_MAP: Record<string, (typeof CATEGORIES)[number]> = {
@@ -28,10 +31,12 @@ export const CATEGORY_MAP: Record<string, (typeof CATEGORIES)[number]> = {
   "voiceprint-system": CATEGORIES[1],
   "smart-badge-platform-user-manual": CATEGORIES[1],
   "redis-protoStuff-deserialize-fix": CATEGORIES[2],
-  "gold-investment-analysis": CATEGORIES[3],
   "aiai2-smart-badge-ai-platform": CATEGORIES[3],
   "backdoor-defense-paper": CATEGORIES[3],
   "journal-selection-analysis": CATEGORIES[3],
   "order-system": CATEGORIES[3],
   "tools-and-config": CATEGORIES[4],
+  "seckill-system-design": CATEGORIES[3],
+  "redis-bitmap-checkin": CATEGORIES[3],
+  "feed-push-architecture": CATEGORIES[3],
 };

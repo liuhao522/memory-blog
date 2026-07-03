@@ -4,30 +4,61 @@
 
 @layer base {
   :root {
-    --color-bg: 255 255 255;
+    --color-bg: 2 6 23;
+    --color-fg: 226 232 240;
+    --color-muted: 100 116 139;
+    --color-border: 30 41 59;
+    --color-card: 15 23 42;
+    --color-card-hover: 30 41 59;
+    --color-accent: 129 140 248;
+    --color-accent-glow: 99 102 241;
+  }
+
+  .light {
+    --color-bg: 248 250 252;
     --color-fg: 15 23 42;
     --color-muted: 100 116 139;
     --color-border: 226 232 240;
     --color-card: 255 255 255;
-    --color-card-hover: 248 250 252;
+    --color-card-hover: 241 245 249;
     --color-accent: 99 102 241;
+    --color-accent-glow: 129 140 248;
   }
+}
 
-  .dark {
-    --color-bg: 15 23 42;
-    --color-fg: 226 232 240;
-    --color-muted: 148 163 184;
-    --color-border: 51 65 85;
-    --color-card: 30 41 59;
-    --color-card-hover: 51 65 85;
-    --color-accent: 129 140 248;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background-color: rgb(var(--color-bg));
   color: rgb(var(--color-fg));
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-bg));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-border));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-muted));
+}
+
+/* Glass utility */
+@layer components {
+  .glass {
+    background: rgb(var(--color-card) / 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgb(var(--color-border) / 0.5);
+  }
 }
 
 /* Code block styling */
@@ -37,41 +68,40 @@ pre code {
   border-radius: 0 !important;
 }
 
-/* Prose overrides for dark mode */
-.dark .prose {
-  --tw-prose-body: rgb(226 232 240);
-  --tw-prose-headings: rgb(248 250 252);
-  --tw-prose-links: rgb(165 180 252);
-  --tw-prose-bold: rgb(248 250 252);
-  --tw-prose-counters: rgb(148 163 184);
-  --tw-prose-bullets: rgb(148 163 184);
-  --tw-prose-hr: rgb(51 65 85);
-  --tw-prose-quotes: rgb(226 232 240);
-  --tw-prose-quote-borders: rgb(99 102 241);
-  --tw-prose-captions: rgb(148 163 184);
-  --tw-prose-code: rgb(226 232 240);
+/* Prose overrides */
+.prose {
+  --tw-prose-body: rgb(var(--color-fg));
+  --tw-prose-headings: rgb(var(--color-fg));
+  --tw-prose-links: rgb(var(--color-accent));
+  --tw-prose-bold: rgb(var(--color-fg));
+  --tw-prose-counters: rgb(var(--color-muted));
+  --tw-prose-bullets: rgb(var(--color-muted));
+  --tw-prose-hr: rgb(var(--color-border));
+  --tw-prose-quotes: rgb(var(--color-fg));
+  --tw-prose-quote-borders: rgb(var(--color-accent));
+  --tw-prose-captions: rgb(var(--color-muted));
+  --tw-prose-code: rgb(var(--color-fg));
   --tw-prose-pre-code: rgb(226 232 240);
+  --tw-prose-pre-bg: rgb(15 23 42);
+  --tw-prose-th-borders: rgb(var(--color-border));
+  --tw-prose-td-borders: rgb(var(--color-border));
+}
+
+.prose table {
+  border-color: rgb(var(--color-border));
+}
+.prose thead {
+  border-bottom-color: rgb(var(--color-border));
+}
+.prose th {
+  background-color: rgb(var(--color-card-hover));
+}
+.prose tr {
+  border-bottom-color: rgb(var(--color-border));
+}
+
+/* Light mode prose overrides */
+.light .prose {
   --tw-prose-pre-bg: rgb(30 41 59);
-  --tw-prose-th-borders: rgb(51 65 85);
-  --tw-prose-td-borders: rgb(51 65 85);
-  --tw-prose-invert-body: rgb(226 232 240);
-  --tw-prose-invert-headings: rgb(248 250 252);
-  --tw-prose-invert-links: rgb(165 180 252);
-  --tw-prose-invert-bold: rgb(248 250 252);
-}
-
-.dark .prose table {
-  border-color: rgb(51 65 85);
-}
-
-.dark .prose thead {
-  border-bottom-color: rgb(51 65 85);
-}
-
-.dark .prose th {
-  background-color: rgb(30 41 59);
-}
-
-.dark .prose tr {
-  border-bottom-color: rgb(51 65 85);
+  --tw-prose-pre-code: rgb(226 232 240);
 }

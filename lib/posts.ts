@@ -11,6 +11,13 @@ function extractTitle(content: string): string | null {
   return match ? match[1].trim() : null;
 }
 
+/* Estimate reading time from word count */
+function estimateReadingTime(content: string): string {
+  const words = content.replace(/```[\s\S]*?```/g, "").replace(/[#*>`\[\]()!|-]/g, "").length;
+  const minutes = Math.max(1, Math.round(words / 300));
+  return `${minutes} min`;
+}
+
 export function getAllPosts(): Post[] {
   if (!fs.existsSync(CONTENT_DIR)) return [];
 
@@ -51,16 +58,33 @@ export function getAllPosts(): Post[] {
         categorySlug: categoryInfo.slug,
         type: data.metadata?.type || "project",
         tech: data.metadata?.tech || [],
-        date: data.metadata?.date || "",
+        date: (() => {
+          const d = data.metadata?.date;
+          if (!d) return "";
+          if (typeof d === "string") return d;
+          if (d instanceof Date) return d.toISOString().split("T")[0];
+          return String(d);
+        })(),
+        featured: data.metadata?.featured || false,
+        highlight: data.metadata?.highlight || "",
+        readingTime: data.metadata?.readingTime || estimateReadingTime(content),
         content,
       } as Post;
     })
     .sort(
       (a, b) =>
-        new Date(b.date).getTime() - new Date(a.date).getTime()
+        new Date(b.date || "").getTime() - new Date(a.date || "").getTime()
     );
 
   return posts;
+}
+
+export function getFeaturedPosts(): Post[] {
+  return getAllPosts().filter((p) => p.featured);
+}
+
+export function getRecentPosts(n: number = 3): Post[] {
+  return getAllPosts().slice(0, n);
 }
 
 export function getPostBySlug(slug: string): Post | null {

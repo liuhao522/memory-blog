@@ -1,30 +1,33 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import { inter, mono } from "./fonts";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import "highlight.js/styles/github-dark.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "记忆知识库 — 个人技术博客",
-    template: "%s | 记忆知识库",
+    default: "Hao Liu · Full-Stack Developer",
+    template: "%s | Hao Liu",
   },
   description:
-    "基于本地记忆知识图谱搭建的个人博客，涵盖 BladeX 微服务平台、统计大屏、打卡系统、声纹系统、黄金投资分析等技术笔记。",
+    "全栈工程师 · 专注于复杂业务系统的架构设计与性能优化。Java Spring Boot + Vue 3 技术栈，热爱技术写作与开源分享。",
   keywords: [
-    "BladeX",
+    "全栈工程师",
+    "Java",
     "Spring Boot",
     "Vue 3",
-    "微服务",
-    "知识图谱",
-    "技术博客",
-    "Java",
     "TypeScript",
+    "微服务",
+    "技术博客",
+    "BladeX",
   ],
-  authors: [{ name: "lh" }],
+  authors: [{ name: "Hao Liu" }],
+  creator: "Hao Liu",
   openGraph: {
-    title: "记忆知识库 — 个人技术博客",
-    description: "基于本地记忆知识图谱搭建的个人博客，涵盖全栈开发、架构设计、投资分析等技术笔记。",
+    title: "Hao Liu · Full-Stack Developer",
+    description: "全栈工程师 · 复杂业务系统架构与性能优化",
     type: "website",
     locale: "zh_CN",
   },
@@ -40,17 +43,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html
+      lang="zh-CN"
+      suppressHydrationWarning
+      className={`${inter.variable} ${mono.variable}`}
+    >
       <head>
         <link
           rel="alternate"
           type="application/rss+xml"
-          title="记忆知识库 RSS"
+          title="Hao Liu RSS"
           href="/feed.xml"
         />
       </head>
-      <body className="min-h-screen flex flex-col antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <body className="min-h-screen flex flex-col antialiased font-sans bg-[rgb(var(--color-bg))] text-[rgb(var(--color-fg))]">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />

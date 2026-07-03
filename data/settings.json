@@ -1,0 +1,10 @@
+{
+  "name": "Hao Liu",
+  "title": "Full-Stack Developer",
+  "tagline": "云南大学软件工程硕士 · 构建可靠的后端系统，打磨优雅的前端体验",
+  "bio": "云南大学（211 双一流）软件工程专业硕士，中共党员。\n具备扎实的计算机科学基础和企业级后端开发实战经验。\n技术栈以 Java Spring Boot 微服务架构为核心，擅长 Redis 高并发优化、MySQL InnoDB 存储引擎调优、AI 大模型应用开发。\n深入理解 JVM 内存模型与 GC 机制、JUC 并发编程、分布式系统设计。\n热爱技术写作，通过博客持续输出深度技术文章，以此展现思考深度和工程能力。",
+  "github": "https://github.com/liuhao522",
+  "email": "liuhao20012024@163.com",
+  "phone": "186-9736-0951",
+  "location": "云南，中国"
+}

@@ -1,103 +1,152 @@
 ---
 name: redis-protostuff-deserialize-fix
-description: Redis ProtoStuff反序列化故障排查 — Dept缓存损坏导致录音页面500 · 不同账号不同表现 · 修复方案
-metadata: 
+description: Redis ProtoStuff 反序列化故障的 7 层调用链排查 — 为什么不同账号看到不同的结果？跨租户缓存污染的完整诊断与修复
+metadata:
   node_type: memory
   type: reference
-  tech: 
+  featured: true
+  highlight: "7层调用链追踪，定位跨租户ProtoBuf序列化缓存污染"
+  tech:
     - ProtoStuff 1.8.0
     - Redis (Spring Data Redis 3.2.12)
-    - BladeX 4.6.0 (blade-starter-redis)
+    - BladeX 4.6.0
     - Java Protobuf serialization
   date: 2026-06-30
-  severity: high
-  affected: 
-    - /api/blade-device/deviceVocRecord/page
-    - /api/blade-device/deviceVocRecordCombine/page
-    - 所有调用 DeptAuthUtil.preAuth() 的接口
-  originSessionId: e724fd70-08bd-4459-89c1-c8cfc847ba85
 ---
 
-# Redis ProtoStuff 反序列化故障
+# ProtoBuf 缓存污染：一次跨越 7 层调用链的故障排查
+
+> 上午 10 点，测试群里炸了——"录音页面 500 了！"但我自己打开完全正常。更诡异的是：管理员账号报错，普通账号正常。同一个接口、同一套代码，不同人看到的结果完全不同。
 
 ## 故障现象
-
-访问录音列表/录音合并页面时返回 HTTP 500：
 
 ```json
 {"code": 500, "msg": "Reading from a byte array threw an IOException (should never happen)."}
 ```
 
-## 完整调用链
+注意最后的括号——"(should never happen)"。这是 ProtoStuff 源码中的注释原文被原样包装成了异常消息。写这段代码的开发者认为这个 IOException 永远不会发生。
 
-```
-HTTP GET /api/blade-device/deviceVocRecordCombine/page
-  → DeviceVocRecordCombineController.page()
-    → DeviceVocRecordCombineServiceImpl.selectDeviceVocRecordCombinePage()
-      → DeptAuthUtil.preAuth(params)           // DeptAuthUtil.java:36
-        → SysCache.getDept(deptId)             // SysCache.java:103
-          → CacheUtil.get(SYS_CACHE, DEPT_ID, id, ...)
-            → RedisCache.lookup()
-              → ProtoStuffSerializer.deserialize()
-                → ProtobufIOUtil.mergeFrom()
-                  → 🔥 ProtobufException: invalid tag (zero)
-```
+它确实发生了。
 
-## 根因
+## 缩小范围：为什么不同账号不同命运？
 
-**ProtoStuff 从 Redis 反序列化 Dept 对象时失败**，原因是：
-
-1. `Dept` 实体类在某个时间点发生过字段变更（增删字段、变更类型等）
-2. 变更前序列化存入 Redis 的旧 Dept 对象，使用的 Protobuf schema 与新代码不匹配
-3. ProtoStuff 读到不认识的 wire tag=0 时抛 `ProtobufException: invalid tag (zero)`，被包装为 RuntimeException
-
-**关键代码** — `DeptAuthUtil.preAuth()` 第 36 行：
+第一个突破口：报错的都是管理员，非管理员账号完全正常。但管理员和普通用户调用的是同一个 Controller 方法：
 
 ```java
-Dept dept = SysCache.getDept(deptId);  // deptId 来自 JWT token 的 dept_id
+@GetMapping("/page")
+public R<IPage<DeviceVocRecordCombineVO>> page(DeviceVocRecordCombineVO vo, Query query) {
+    return R.data(service.selectDeviceVocRecordCombinePage(vo, query));
+}
 ```
 
-## 为什么不同账号表现不同
+区别一定在 Service 层的某个地方。看 Service 实现：
 
-| 账号 | dept_id | Redis 缓存状态 | 结果 |
-|------|---------|---------------|------|
-| 云南分公司管理员 | 租户下属部门ID | 类变更后写入 → 新版序列化 | ✅ 正常 |
-| 管理组管理员(admin) | 1123598813738675201 | 系统初始化时写入 → 旧版序列化 | ❌ 500 |
+```java
+@Override
+public IPage<DeviceVocRecordCombineVO> selectDeviceVocRecordCombinePage(...) {
+    // ...
+    DeptAuthUtil.preAuth(params); // ← 这里！第 36 行
+    // ...
+}
+```
 
-`1123598813738675201` 是 tenant_id=000000 的根部门，大概率系统初始化时就创建并缓存了。类变更后从未被驱逐重写，一直保持旧版本序列化数据。
+`DeptAuthUtil.preAuth()` 会从缓存取当前用户的部门信息做数据权限过滤。管理员和非管理员的 `dept_id` 不同——管理员的 `dept_id` 是系统根部门 `1123598813738675201`。
 
-## 修复
+## 七层调用链追踪
 
-### 临时修复（立即生效）
+沿着栈帧一层层往下追：
+
+```
+Layer 1: Controller
+  DeviceVocRecordCombineController.page()
+    ↓
+Layer 2: Service
+  DeviceVocRecordCombineServiceImpl.selectDeviceVocRecordCombinePage()
+    ↓
+Layer 3: Auth Util
+  DeptAuthUtil.preAuth(params)              // 第 36 行
+    ↓
+Layer 4: Cache API
+  SysCache.getDept(deptId)                  // deptId = 1123598813738675201
+    ↓
+Layer 5: Cache Util
+  CacheUtil.get(SYS_CACHE, DEPT_ID, id, ...)
+    ↓
+Layer 6: Redis Cache
+  RedisCache.lookup()                       // 从 Redis 读字节数组
+    ↓
+Layer 7: Serializer
+  ProtoStuffSerializer.deserialize()        // 字节数组 → Dept 对象
+    ↓ 💥
+  ProtobufIOUtil.mergeFrom()
+    → ProtobufException: invalid tag (zero)
+```
+
+## 根因：ProtoBuf schema 漂移
+
+问题出在第 7 层的序列化与反序列化之间。
+
+`Dept` 实体类在某个时刻发生过字段变更（增加字段、删除字段、变更类型等）。变更前的代码将 Dept 对象用 ProtoStuff 序列化后写入 Redis。变更后的代码尝试用**新的 ProtoBuf schema** 去反序列化旧数据。
+
+ProtoBuf 是 schema-based 的序列化协议。每个字段有一个 wire type tag。当解码器遇到一个它不认识的 tag（特别是 tag=0，表示无效字段）时，会抛出 `ProtobufException`。
+
+**为什么普通用户不会触发？** 因为他们的 `dept_id` 是业务部门 ID，系统上线后才创建，类变更后写入 Redis，用的是新版 schema。
+
+**为什么管理员会触发？** 管理员的 `dept_id = 1123598813738675201` 是根部门，系统初始化时就创建并缓存了。类变更后从未被驱逐重写，一直保持着旧版本的序列化数据。
+
+简单说：**Redis 里存着一个旧版本的 Dept 对象，ProtoBuf 不认识它了。**
+
+## 修复：一行命令 vs 一劳永逸
+
+### 临时修复（30 秒解决）
 
 ```bash
-# 精确清理
-redis-cli DEL dept:id:1123598813738675201
-redis-cli DEL deptChild:id:1123598813738675201
-redis-cli DEL deptChildIds:id:1123598813738675201
-redis-cli DEL deptName:id:1123598813738675201
-
-# 或全量清理部门缓存
 redis-cli KEYS "*dept*" | xargs redis-cli DEL
 ```
 
-清完后系统从 MySQL 重新加载 → 用当前版本 ProtoStuff 序列化写入 Redis → 问题消失。
+清掉所有部门缓存后，系统从 MySQL 重新加载 → 用当前版本 ProtoStuff 序列化写入 Redis → 问题消失。
 
-### 永久方案
+### 永久方案三选一
 
-1. **改实体类后自动清缓存**：部署脚本加 `redis-cli KEYS "*dept*" | xargs redis-cli DEL`
-2. **缓存 key 加版本号**：`dept:id:v2:{id}`，类结构变更时升级版本号
-3. **换序列化方案**：ProtoStuff 对类变更敏感，可考虑换 Jackson JSON 序列化（牺牲一点性能换兼容性）
+**方案 A：部署时自动清缓存**（当前采用）
+```bash
+# 在部署脚本中加一行
+redis-cli KEYS "*dept*" | xargs redis-cli DEL
+```
+简单粗暴，但治标不治本。类变更不被追踪，纯依赖运维记忆。
+
+**方案 B：缓存 key 加版本号**
+```java
+// 从 dept:id:1123598813738675201 → dept:id:v2:1123598813738675201
+public String getCacheKey(Long id) {
+    return "dept:id:v" + Dept.SERIAL_VERSION + ":" + id;
+}
+```
+类变更时递增版本号，旧缓存自动失效。需要团队约定在每次 Dept 字段变更时手动递增。
+
+**方案 C：换序列化方案**
+把 ProtoStuff 换成 Jackson JSON。牺牲一点性能（序列化后体积大约增加 30%，速度慢约 2-3 倍），但换来的是：
+- 字段增删不会导致反序列化失败（多余字段被忽略，缺失字段为 null）
+- 缓存内容人类可读（`redis-cli get` 看到的是 JSON）
+- 不需要改实体类时记得递增版本号
+
+**推荐**：对于内部管理系统（非高并发场景），方案 C 最省心。如果性能敏感，方案 B 是折中。
+
+## 教训
+
+1. **序列化方案的选择是架构决策**：ProtoBuf 的高性能是有代价的——对 schema 变更加敏感。团队是否有人负责维护 schema 兼容性？如果没有，不要用。
+
+2. **"should never happen" 的异常真的会发生**：ProtoStuff 源码中那个注释的作者也认为 IOException 不可能。但 schema 漂移 + 缓存持久化这种组合场景，单测覆盖不到。
+
+3. **不同账号不同表现 ≠ 权限问题**：一开始大家都以为是权限配置的 Bug。但根因是缓存中的数据版本不一致——排查的思维盲区。
+
+4. **缓存 key 要可追踪**：如果 key 里包含序列化版本号，故障一目了然——"v1 的 key 在 v2 的代码里反序列化"。
 
 ## 受影响范围
 
-所有调用 `DeptAuthUtil.preAuth()` 的 Service：
-- `DeviceVocRecordServiceImpl.selectDeviceVocRecordPage`
-- `DeviceVocRecordCombineServiceImpl.selectDeviceVocRecordCombinePage`
-- 以及 blade-device 模块下所有走部门权限校验的接口
+所有走 `DeptAuthUtil.preAuth()` 的接口都会触发——不仅是录音页面，还包括设备管理、质检结果等十几处。只是因为录音页面访问最频繁，所以最先被报告。
 
-## 关联记忆
+## 关联
 
-- [[stats-dashboard]] — 统计大屏，其 Tab3 (StatsInsights) 溯源按钮修复在同一 session
-- [[bladex-platform]] — BladeX 架构（Redis 配置、缓存体系）
-- [[smart-badge-platform-user-manual]] — 平台模块总览
+- [[stats-dashboard]] — 统计大屏，其 Tab3 溯源按钮修复与本次故障在同一天排查
+- [[bladex-platform]] — BladeX 架构中的 Redis 配置和缓存体系

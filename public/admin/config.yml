@@ -1,0 +1,114 @@
+backend:
+  name: github
+  repo: liuhao522/memory-blog
+  branch: main
+  # OAuth 配置说明见下方
+  # base_url: https://api.decapcms.org
+  # auth_endpoint: /auth
+  # auth_type: pkce
+
+# 管理页面路径
+site_url: https://liuhao522.github.io/memory-blog
+display_url: https://liuhao522.github.io/memory-blog
+media_folder: public/images
+public_folder: /memory-blog/images
+logo_url: https://liuhao522.github.io/memory-blog/avatar.jpg
+
+# 内容编辑
+locale: zh_Hans
+
+collections:
+  - name: blog
+    label: 文章
+    label_singular: 文章
+    folder: content
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: yaml-frontmatter
+    summary: "{{name}} — {{description}}"
+    editor:
+      preview: false
+    fields:
+      - label: 标题
+        name: name
+        widget: string
+        required: true
+      - label: 描述
+        name: description
+        widget: string
+        required: true
+      - label: 分类
+        name: category
+        widget: select
+        options:
+          - { label: Platform, value: Platform }
+          - { label: Business, value: Business }
+          - { label: Troubleshooting, value: Troubleshooting }
+          - { label: Projects, value: Projects }
+          - { label: Tools, value: Tools }
+        required: false
+        hint: 可选，如果不选则由系统自动匹配
+      - label: 技术标签
+        name: tech
+        widget: list
+        required: false
+        field:
+          label: 技术
+          name: tech
+          widget: string
+      - label: 日期
+        name: date
+        widget: date
+        required: true
+      - label: 精选展示
+        name: featured
+        widget: boolean
+        default: false
+        required: false
+      - label: 精选摘要
+        name: highlight
+        widget: string
+        required: false
+        hint: 展示在首页 Bento 卡片上的简短描述
+      - label: 阅读时长
+        name: readingTime
+        widget: string
+        required: false
+        hint: 例如 "5 min"，不填则自动计算
+      - label: 正文
+        name: body
+        widget: markdown
+        required: true
+
+  - name: settings
+    label: 个人设置
+    files:
+      - label: 个人信息
+        name: personal
+        file: data/settings.json
+        fields:
+          - label: 姓名
+            name: name
+            widget: string
+          - label: 职位
+            name: title
+            widget: string
+          - label: 简介
+            name: tagline
+            widget: string
+          - label: 个人 Bio
+            name: bio
+            widget: text
+          - label: GitHub
+            name: github
+            widget: string
+          - label: 邮箱
+            name: email
+            widget: string
+          - label: 手机
+            name: phone
+            widget: string
+          - label: 地址
+            name: location
+            widget: string

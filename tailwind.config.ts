@@ -8,6 +8,10 @@ const config: Config = {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
+      },
       colors: {
         primary: {
           50: "#eef2ff",
@@ -23,12 +27,31 @@ const config: Config = {
           950: "#1e1b4b",
         },
       },
+      animation: {
+        "fade-in": "fadeIn 0.6s ease-out",
+        "slide-up": "slideUp 0.6s ease-out",
+        "scale-in": "scaleIn 0.4s ease-out",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        slideUp: {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        scaleIn: {
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+      },
       typography: {
         DEFAULT: {
           css: {
             maxWidth: "none",
             code: {
-              backgroundColor: "#f1f5f9",
+              backgroundColor: "rgb(var(--color-card-hover))",
               padding: "0.125rem 0.25rem",
               borderRadius: "0.25rem",
               fontWeight: "400",
