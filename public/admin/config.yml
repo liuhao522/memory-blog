@@ -2,10 +2,9 @@ backend:
   name: github
   repo: liuhao522/memory-blog
   branch: main
-  # OAuth 配置说明见下方
-  # base_url: https://api.decapcms.org
-  # auth_endpoint: /auth
-  # auth_type: pkce
+  base_url: https://api.decapcms.org
+  auth_endpoint: /auth
+  auth_type: pkce
 
 # 管理页面路径
 site_url: https://liuhao522.github.io/memory-blog
