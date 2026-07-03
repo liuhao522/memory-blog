@@ -203,15 +203,8 @@ function GitHubTokenBackend(config) {
 }
 
 GitHubTokenBackend.prototype.authComponent = function() {
-  var self = this;
-  // React 18 class component (no JSX)
-  function AuthComp() {
-    return React.createElement('div',
-      { style: { padding: '20px', color: '#22c55e', fontSize: '14px' } },
-      '✅ 已连接 GitHub · ' + self.repo
-    );
-  }
-  return AuthComp;
+  // Token is entered via prompt() in the constructor, no auth UI needed
+  return null;
 };
 
 GitHubTokenBackend.prototype.authenticate = function() {
