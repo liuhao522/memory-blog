@@ -203,11 +203,15 @@ function GitHubTokenBackend(config) {
 }
 
 GitHubTokenBackend.prototype.authComponent = function() {
-  return {
-    render: function(el) {
-      el.innerHTML = '<div style="padding:20px;color:#22c55e;font-size:14px">&#9989; 已连接 GitHub · ' + this.repo + '</div>';
-    }.bind(this)
-  };
+  var self = this;
+  // React 18 class component (no JSX)
+  function AuthComp() {
+    return React.createElement('div',
+      { style: { padding: '20px', color: '#22c55e', fontSize: '14px' } },
+      '✅ 已连接 GitHub · ' + self.repo
+    );
+  }
+  return AuthComp;
 };
 
 GitHubTokenBackend.prototype.authenticate = function() {
