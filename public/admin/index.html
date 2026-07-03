@@ -186,22 +186,20 @@ function stringifyFM(meta, body) {
 
 // ── Backend Class ──
 function GitHubTokenBackend(config) {
-  // config is the full CMS config object
-  var cfg = config.get('backend');
-  if (!cfg) cfg = config.backend || config.config.backend;
+  // config may be a plain object OR an Immutable Map (depending on Decap CMS version)
+  var cfg = (config && typeof config.get === 'function') ? config.get('backend') : (config.backend || config);
+  if (!cfg) cfg = config;
 
-  var token = cfg.get ? cfg.get('token') : cfg.token;
+  var token = (cfg && typeof cfg.get === 'function') ? cfg.get('token') : cfg.token;
   if (!token || token === 'YOUR_GITHUB_TOKEN_HERE') {
-    // Prompt for token
     token = prompt('请输入 GitHub Personal Access Token:');
     if (!token) throw new Error('Token required');
   }
 
   this.token = token;
-  this.repo = cfg.get ? cfg.get('repo') : cfg.repo;
-  this.branch = (cfg.get ? cfg.get('branch') : cfg.branch) || 'main';
+  this.repo = (cfg && typeof cfg.get === 'function') ? cfg.get('repo') : cfg.repo;
+  this.branch = ((cfg && typeof cfg.get === 'function') ? cfg.get('branch') : cfg.branch) || 'main';
   this.repoPath = '/repos/' + this.repo;
-  console.log('GitHub Backend initialized for', this.repo);
 }
 
 GitHubTokenBackend.prototype.authComponent = function() {
@@ -222,7 +220,7 @@ GitHubTokenBackend.prototype.getToken = function() {
 
 GitHubTokenBackend.prototype.entriesByFolder = function(collection, extension) {
   var self = this;
-  var folder = collection.get('folder');
+  var folder = typeof collection.get === 'function' ? collection.get('folder') : collection.folder;
   return gh(this.token, this.repoPath + '/contents/' + folder + '?ref=' + this.branch)
     .then(function(files) {
       if (!Array.isArray(files)) {
